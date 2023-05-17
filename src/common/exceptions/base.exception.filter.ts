@@ -15,7 +15,7 @@ import {
       const request = ctx.getRequest<FastifyRequest>();
   
       request.log.error(exception)
-  
+      console.log(22222222222)
       // 非 HTTP 标准异常的处理。
       response.status(HttpStatus.SERVICE_UNAVAILABLE).send({
         statusCode: HttpStatus.SERVICE_UNAVAILABLE,

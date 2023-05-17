@@ -4,10 +4,20 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import {BusinessException} from '../common/exceptions/business.exception'
 import { ConfigService } from '@nestjs/config';
-
+import {ApiTags,ApiOperation} from '@nestjs/swagger'
+import {AddUserDto} from './user.dto'
+@ApiTags('用户')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService,private readonly configService:ConfigService) {}
+
+  @ApiOperation({
+    summary: '新增用户',
+  })
+  @Post('/add')
+  createUser(@Body() user: AddUserDto) {
+    return this.userService.createOrSave(user);
+  }
 
   @Get('getTestName')
   getTestName(){

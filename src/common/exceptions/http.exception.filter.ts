@@ -27,7 +27,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
         })
         return
     }
-
+    console.log(333333333333333)
     response.status(status).send({
       statusCode: status,
       timestamp: new Date().toISOString(),
