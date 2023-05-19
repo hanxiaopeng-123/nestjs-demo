@@ -13,9 +13,10 @@ import {
       const ctx = host.switchToHttp();
       const response = ctx.getResponse<FastifyReply>();
       const request = ctx.getRequest<FastifyRequest>();
-  
+      
       request.log.error(exception)
       console.log(22222222222)
+      console.log(exception)
       // 非 HTTP 标准异常的处理。
       response.status(HttpStatus.SERVICE_UNAVAILABLE).send({
         statusCode: HttpStatus.SERVICE_UNAVAILABLE,

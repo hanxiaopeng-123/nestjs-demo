@@ -4,6 +4,7 @@ import { AppModule } from './app.module';
 import {TransformInterceptor} from './common/interceptors/transform.interceptor'
 import {AllExceptionsFilter} from './common/exceptions/base.exception.filter'
 import {HttpExceptionFilter} from './common/exceptions/http.exception.filter'
+import {FastifyLogger} from './common/logger/index'
 import {
   FastifyAdapter,
   NestFastifyApplication,
@@ -14,7 +15,7 @@ declare const module: any;
 async function bootstrap() { 
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new FastifyAdapter({logger:FastifyLogger}),
   );
   if (module.hot) {
     module.hot.accept();
@@ -24,7 +25,7 @@ async function bootstrap() {
     type: VersioningType.URI,
     defaultVersion: [VERSION_NEUTRAL, '1', '2'] //多个版本
   }); 
-  app.useGlobalInterceptors(new TransformInterceptor())
+  app.useGlobalInterceptors(new TransformInterceptor()) 
   app.useGlobalFilters(new AllExceptionsFilter(),new HttpExceptionFilter())
 
   // 启动全局字段校验，保证请求接口字段校验正确。

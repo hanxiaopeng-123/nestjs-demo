@@ -6,7 +6,7 @@ const path = require('path');
 const databaseType: DataSourceOptions['type'] = 'mysql';
 const { MONGODB_CONFIG ,MYSQL_CONFIG} = getConfig()
 
-const MONGODB_DATABASE_CONFIG = {
+const MONGODB_DATABASE_CONFIG = { 
   ...MYSQL_CONFIG,
   type: databaseType,
   entities: [path.join(__dirname, `../../**/*.${MYSQL_CONFIG.entities}.entity{.ts,.js}`)],

@@ -8,14 +8,14 @@ import {User} from './user.mongo.entity'
 export class UserService {
 
   constructor(
+    @Inject('USER_REPOSITORY')private userRepository:Repository<User>
     // @InjectRepository(User) private userRepository:Repository<User>
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
+    // @InjectRepository(User)
+    // private userRepository: Repository<User>,
   ){}
   
   createOrSave(user) {
-    console.log(1111111111)
-    debugger
+    console.log(1111111111) 
     return this.userRepository.save(user)
    }
 
