@@ -6,8 +6,10 @@ import {ConfigModule } from '@nestjs/config'
 import {getConfig} from './utils'
 import { CacheModule} from '@nestjs/cache-manager'
 import  redisStore from 'cache-manager-redis-store';
-// import { from  } from 'rxjs';
 import {RedisClientOptions} from 'redis';
+import {AuthModule} from './auth/auth.module'
+import { APP_GUARD } from '@nestjs/core';
+import {JwtAuthGuard} from 'src/auth/guards/jwt-auth.guard'
 const redisConfig= getConfig('REDIS_CONFIG')
 @Module({
   imports: [
@@ -24,8 +26,11 @@ const redisConfig= getConfig('REDIS_CONFIG')
     ignoreEnvFile: true, 
     isGlobal:true,//开启 Config 全局注册，如果 isGlobal 没有添加的话，则需要先在对应的 module 文件中注册后才能正常使用 ConfigService
     load:[getConfig]
-  }),UserModule],
+  }),UserModule,AuthModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,  {
+    provide: APP_GUARD,
+    useClass: JwtAuthGuard,
+  },],
 })
 export class AppModule {}

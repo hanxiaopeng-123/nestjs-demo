@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete,Version, VERSION_NEUTRAL, } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete,Version, VERSION_NEUTRAL,UseGuards } from '@nestjs/common';
 import { FeishuService } from './feishu.service';
 import { CreateFeishuDto } from './dto/create-feishu.dto';
 import { UpdateFeishuDto } from './dto/update-feishu.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { FeishuMessageDto } from './feishu.dto';
-
+import { FeishuMessageDto, GetUserTokenDto} from './feishu.dto';
+import { Public } from 'src/auth/constants';
+import { FeishuAuthGuard } from 'src/auth/guards/feishu-auth.guard';
 @ApiTags('飞书')
 @Controller('feishu')
 export class FeishuController {
@@ -18,6 +19,16 @@ export class FeishuController {
     const { receive_id_type, ...rest } = params
     return this.feishuService.sendMessage(receive_id_type, rest);
   }
+  
+  @ApiOperation({
+    summary: '获取用户凭证',
+  })
+  @Post('getUserToken')
+  getUserToken(@Body() params: GetUserTokenDto) {
+    const { code } = params
+    return this.feishuService.getUserToken(code);
+  }
+
   @Post()
   create(@Body() createFeishuDto: CreateFeishuDto) {
     return this.feishuService.create(createFeishuDto);

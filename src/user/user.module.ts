@@ -15,7 +15,7 @@ import {ConfigModule } from '@nestjs/config'
   ],
   controllers: [UserController,FeishuController],
   providers: [UserService,FeishuService,...UserProviders],
-  exports: [UserService],
+  exports: [UserService,FeishuService],
   // imports:[CacheModule.register()],
   // imports: [FeishuModule]
 })

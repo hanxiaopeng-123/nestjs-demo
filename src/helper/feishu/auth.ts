@@ -9,6 +9,8 @@ export type GetAppTokenRes = {
 };
 
 export const getUserToken = async ({ code, app_token }) => {
+  console.log('code',code)
+  console.log('app_token',app_token)
   const { data } = await methodV({
     url: `/authen/v1/access_token`,
     method: 'POST',
@@ -20,6 +22,7 @@ export const getUserToken = async ({ code, app_token }) => {
       code,
     },
   });
+  console.log('getUserToken',data)
   return data;
 };
 

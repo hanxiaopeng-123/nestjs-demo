@@ -5,6 +5,7 @@ import {TransformInterceptor} from './common/interceptors/transform.interceptor'
 import {AllExceptionsFilter} from './common/exceptions/base.exception.filter'
 import {HttpExceptionFilter} from './common/exceptions/http.exception.filter'
 import {FastifyLogger} from './common/logger/index'
+import fastifyCookie from '@fastify/cookie';
 import {
   FastifyAdapter,
   NestFastifyApplication,
@@ -27,7 +28,9 @@ async function bootstrap() {
   }); 
   app.useGlobalInterceptors(new TransformInterceptor()) 
   app.useGlobalFilters(new AllExceptionsFilter(),new HttpExceptionFilter())
-
+  app.register(fastifyCookie, {
+    secret: 'my-secret', // for cookies signature
+  });
   // 启动全局字段校验，保证请求接口字段校验正确。
   app.useGlobalPipes(new ValidationPipe());
   generateDocument(app)

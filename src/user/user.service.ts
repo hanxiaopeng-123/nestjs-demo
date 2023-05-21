@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import {User} from './user.mongo.entity'
+import { FeishuUserInfo } from './feishu/feishu.dto';
 @Injectable()
 export class UserService {
 
@@ -18,6 +19,10 @@ export class UserService {
     console.log(1111111111) 
     return this.userRepository.save(user)
    }
+
+   async createOrUpdateByFeishu(feishuUserInfo: FeishuUserInfo) {
+    return await this.userRepository.save(feishuUserInfo);
+  }
 
   create(createUserDto: CreateUserDto) {
     return 'This action adds a new user';
