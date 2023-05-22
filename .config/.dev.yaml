@@ -4,8 +4,8 @@ TEST_VALUE:
 FEISHU_CONFIG:
   FEISHU_URL: https://open.feishu.cn/open-apis
   FEISHU_API_HOST: https://open.feishu.cn
-  FEISHU_APP_ID: cli_a4e272b91ff8500d
-  FEISHU_APP_SECRET: eXDF8AuhgpErz8ALn4K4Xdwn40OTSsIR 
+  FEISHU_APP_ID: cli_a4d767990b39d013
+  FEISHU_APP_SECRET: hRApxDnid4fcfqrEGpsMQgSq0xNpyY76 
   APP_TOKEN_CACHE_KEY: APP_TOKEN_CACHE_KEY
 MONGODB_CONFIG:
   name: "nestjs"          # 自定义次数据库链接名称
@@ -21,7 +21,7 @@ MYSQL_CONFIG:
   name: "112"
   type: "mysql"
   host: "localhost"
-  port: 3306
+  port: 3307
   username: "root"
   password: "123456"
   charset: 'utf8mb4'

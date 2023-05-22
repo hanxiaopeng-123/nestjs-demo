@@ -37,7 +37,6 @@ import {
       @Res({ passthrough: true }) response: any,
       @Query() query: GetTokenByApplications,
     ) {
-      return 1
       const { access_token } = await this.authService.login(user);
       console.log('access_token',access_token)
       response.setCookie('jwt', access_token, {
